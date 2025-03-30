@@ -1,0 +1,33 @@
+﻿@using DemoCRUD.Models
+@model IEnumerable<TeacherModel>
+
+<div>
+    <h1 style="text-align:center;">Teacher Details</h1>
+    <table class="table table-bordered table-responsive table-dark table-hover">
+        <tr>
+            <th>Id</th>
+            <th>Teacher Name</th>
+            <th>Subject</th>
+            <th>Semester</th>
+            <th>Experience</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (TeacherModel item in Model)
+        {
+
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.T_Name</td>
+                <td>@item.Subject</td>
+                <td>@item.sem</td>
+                <td>@item.Exp</td>
+                <td>@item.Salary</td>
+                <td>
+                    <a asp-action="EditEmployee" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="DeleteEmployee" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
