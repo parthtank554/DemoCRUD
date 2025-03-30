@@ -13,7 +13,7 @@ A simple **ASP.NET Core MVC** project for managing teacher records with full **C
 ## 🛠️ Technologies Used
 - ⚡ **ASP.NET Core MVC**
 - 🗄️ **SQL Server**
-- 🎨 **Bootstrap 5** (for UI styling)
+- 🎨 **Bootstrap** (for UI styling)
 - 🔄 **Without Using of Entity Framework Core**
 
 ## 📂 Project Structure
