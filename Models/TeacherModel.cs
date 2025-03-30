@@ -54,27 +54,30 @@ namespace DemoCRUD.Models
             return lsttech;
         }
 
-        //public TeacherModel getData(string Id)
-        //{
-        //    TeacherModel model = new TeacherModel();
-        //    SqlCommand cmd = new SqlCommand("select * from Teacher where Id = '"+Id+"'", con);
-        //    con.Open();
-        //    SqlDataReader dr = cmd.ExecuteReader();
-        //    if (dr.HasRows)
-        //    {
-        //        while (dr.Read())
-        //        {
-        //            model.Id = Convert.ToInt32(dr["Id"].ToString());
-        //            model.T_Name = dr["T_Name"].ToString();
-        //            model.Subject = dr["Subject"].ToString();
-        //            model.sem = Convert.ToInt32(dr["Sem"].ToString());
-        //            model.Exp = Convert.ToInt32(dr["Experience"].ToString());
-        //            model.Salary = Convert.ToInt32(dr["Salary"].ToString());
-        //        }
-        //        con.Close();
-        //        return model;
-        //    }
-        //}
+        public TeacherModel getData(string Id)
+        {
+            TeacherModel model = new TeacherModel();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Teacher WHERE Id = @Id", con);
+            cmd.Parameters.AddWithValue("@Id", Id); // Secure query to prevent SQL Injection
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+                
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    model.Id = Convert.ToInt32(dr["Id"]);
+                    model.T_Name = dr["T_Name"].ToString();
+                    model.Subject = dr["Subject"].ToString();
+                    model.sem = Convert.ToInt32(dr["Sem"]);
+                    model.Exp = Convert.ToInt32(dr["Experience"]);
+                    model.Salary = Convert.ToInt32(dr["Salary"]);
+                }
+            }
+
+            con.Close();
+            return model; // Always return a model, even if no data is found
+        }
 
         public bool Insert(TeacherModel tech)
         {
@@ -91,7 +94,35 @@ namespace DemoCRUD.Models
                 return true;
             }
             return false;
-
+        }
+        public bool update(TeacherModel tech)
+        {
+            SqlCommand cmd = new SqlCommand("update Teacher set T_Name=@name, Subject=@sub, Sem=@sem , Experience=@exp ,Salary=@sal where Id = @id", con);
+            cmd.Parameters.AddWithValue("@name", tech.T_Name);
+            cmd.Parameters.AddWithValue("@sub", tech.Subject);
+            cmd.Parameters.AddWithValue("@sem", tech.sem);
+            cmd.Parameters.AddWithValue("@exp", tech.Exp);
+            cmd.Parameters.AddWithValue("@sal", tech.Salary);
+            cmd.Parameters.AddWithValue("@id", tech.Id);
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            if (i >= 1)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool delete(TeacherModel tech)
+        {
+            SqlCommand cmd = new SqlCommand("delete Teacher where Id = @id", con);
+            cmd.Parameters.AddWithValue("@id", tech.Id);
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            if (i >= 1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

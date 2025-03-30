@@ -1,0 +1,76 @@
+﻿@model DemoCRUD.Models.TeacherModel
+<div class="card">
+    <div class="card-header bg-success text-white text-uppercase">
+        <h4>Edit Teacher</h4>
+    </div>
+
+    <div class="card-body">
+        <form asp-action="EditTeacher" asp-controller="Teacher" method="post">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="T_Name" class="label-control"></label>
+                        <input asp-for="T_Name" class="form-control" />
+                        <span asp-validation-for="T_Name" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Subject" class="label-control"></label>
+                        <input asp-for="Subject" class="form-control" />
+                        <span asp-validation-for="Subject" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="sem" class="label-control"></label>
+                        <input asp-for="sem" class="form-control" />
+                        <span asp-validation-for="sem" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Exp" class="label-control"></label>
+                        <input asp-for="Exp" class="form-control" />
+                        <span asp-validation-for="Exp" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Salary" class="label-control"></label>
+                        <input asp-for="Salary" class="form-control" />
+                        <span asp-validation-for="Salary" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" value="Update" class="btn btn-success rounded-1">
+                    Update
+                </button>
+            </div>
+
+        </form>
+        @if (TempData["msg"] != null)
+        {
+            <script>
+
+                alert('@TempData["msg"].ToString();');
+                window.location.href = "@Url.Action("Index", "Teacher")";
+            </script>
+        }
+    </div>
+</div>
